@@ -1,0 +1,20 @@
+defmodule Edge.Accounts.User do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "users" do
+    field :email, :string
+    field :firstname, :string
+    field :last_seen, :utc_datetime
+    field :lastname, :string
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:firstname, :lastname, :email, :last_seen])
+    |> validate_required([:firstname, :lastname, :email, :last_seen])
+  end
+end
